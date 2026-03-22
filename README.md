@@ -44,7 +44,22 @@ En resumen, **Aegis Systems** simplifica la administración en la nube, **reduce
 - 🧱 Firewall  
 - 🛡️ Servidor bastión  
 - 🗄️ MariaDB  
-- 📡 Protocolos de monitoreo (SNMP, ICMP)  
+- 📡 Protocolos de monitoreo (SNMP, ICMP)
+
+## 🏗️ Arquitectura del Sistema
+
+El sistema Aegis se compone de dos módulos principales que interactúan para proporcionar una solución completa de gestión e interfaz de usuario:
+
+1.  **AegisManager**: El núcleo de gestión que interactúa directamente con el hipervisor Proxmox VE. Funciona como un backend que expone una API REST para realizar operaciones sobre nodos y máquinas virtuales.
+2.  **AegisWeb**: La cara visible para los clientes y administradores. Es un portal web que permite la gestión de incidencias, visualización de servicios y acceso al monitor de infraestructura (a través de AegisManager).
+
+### Flujo de Datos
+1.  **Usuario Final** -> Accede a **AegisWeb** para ver su dashboard y reportar incidencias.
+2.  **Administrador** -> Accede a **AegisWeb** para gestionar incidencias y visualizar el estado del sistema.
+3.  **AegisWeb** -> Integra **AegisManager** mediante un iframe o consultando sus APIs para mostrar el estado de la virtualización.
+4.  **AegisManager** -> Se conecta a la API de **Proxmox** (`proxmoxer`) para obtener datos en tiempo real (CPU, RAM, Estado) y ejecutar comandos (Start, Stop, Console).
+
+---
 - ⚙️ API's del sistema operativo
 - 🖥️ Lenguaje: Python
 
