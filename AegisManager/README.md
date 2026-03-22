@@ -1,4 +1,4 @@
-# 🛡️ Guía Maestra de AEGIS MANAGER
+# 🛡️ Guía de AEGIS MANAGER
 
 ¡Bienvenido al manual de arquitectura y construcción de **AEGIS MANAGER**! Esta guía ha sido diseñada para que cualquier persona con conocimientos básicos de Python y HTML pueda no solo usar la aplicación, sino **reconstruirla desde cero**.
 
@@ -31,7 +31,7 @@ Una "Single Page Application" (SPA) simplificada que usa **Tailwind CSS** para e
 ---
 
 ## 3. Estructura de Archivos (El Mapa)
-Para reconstruir la app, organiza tus carpetas así:
+La estructura de la aplicación es la siguiente:
 
 ```text
 MONITOR-POR-ANTIGRAVITI/
@@ -51,57 +51,7 @@ MONITOR-POR-ANTIGRAVITI/
 
 ---
 
-## 4. Cómo Reconstruir la Aplicación (Paso a Paso)
-
-### Paso 1: Configurar el Entorno
-Instala Python 3 y las librerías necesarias:
-```bash
-pip install flask proxmoxer requests flask-cors
-```
-
-### Paso 2: Crear el Cliente Proxmox (`app/servicios_proxmox.py`)
-Aquí debes implementar una clase `ProxmoxClient` que use `proxmoxer.ProxmoxAPI`. Esta clase debe manejar:
-1.  **Login**: Autenticación con Token o Usuario/Pass.
-2.  **Get nodes/vms**: Listar recursos del servidor.
-3.  **Actions**: Enviar comandos de estado (`start`, `stop`, etc).
-
-### Paso 3: Lanzar el Servidor (`app/servidor_web.py`)
-Define las rutas para servir los HTMLs y las rutas `/api/...` que llamen a tu clase del Paso 2. 
-> [!TIP]
-> Asegúrate de manejar errores 401 (No autorizado) para redirigir al login si la sesión caduca.
-
-### Paso 4: Crear la Interfaz Atómica (Frontend)
-Usa **Tailwind CSS** mediante su CDN en el `head` de tus HTMLs para poder usar clases como `dark:bg-black`.
-1.  **Header**: Incluye el logo de AEGIS y el botón de alternar tema (`alternarTema()`).
-2.  **Dashboard**: Un menú lateral para los nodos y un área central para las tarjetas de máquinas.
-3.  **Tarjetas**: Deben generarse dinámicamente con JS basándose en los datos de la API.
-
-### Paso 5: Programar la Interactividad (`static/js/controlador_interfaz.js`)
-Esta es la parte más importante. Debes crear funciones para:
-*   **Fetch**: Pedir datos a tu servidor cada pocos segundos.
-*   **DOM Manipulation**: Borrar y volver a dibujar las tarjetas o las barras de progreso.
-*   **LocalStorage**: Guardar si el usuario prefiere el modo claro u oscuro.
-
----
-
-## 5. Diseño y Estética (Corporate Aegis)
-AEGIS se basa en una paleta de colores minimalista:
-*   **Oscuro**: Fondo negro puro (`#000000`), tarjetas gris oscuro (`#0a0a0a`), bordes sutiles.
-*   **Claro**: Fondo blanco, tarjetas gris muy claro por arriba, bordes definidos pero suaves.
-*   **Branding**: Siempre incluye el pie de página centrando: `© 2026 AEGIS SYSTEMS | AEGISSYSTEM.ES`.
-
----
-
-## 6. Puesta en Marcha (Despliegue)
-Para arrancar el motor de Aegis:
-1.  Abre la terminal en la raíz del proyecto.
-2.  Ejecuta: `python3 -m app.servidor_web`.
-3.  Abre en tu navegador: `http://localhost:8000`.
-
----
-
 ## 7. Diccionario Técnico de Funciones
-Para facilitar la modificación del código, aquí tienes un desglose de qué hace cada función importante:
 
 ### ⚙️ Backend: `app.py`
 | Función | Propósito |
@@ -135,6 +85,3 @@ Para facilitar la modificación del código, aquí tienes un desglose de qué ha
 | `actualizarInterfazEstadisticas` | Actualiza DOM con nuevos datos de máquina. |
 | `formatearSegundos` | Formatea tiempo uptime a formato legible. |
 | `lanzarConsola` | Abre consola VNC/NoVNC en nueva ventana. |
-
----
-*Documentación oficial de AEGIS SYSTEMS. La virtualización profesional, simplificada al máximo.*
