@@ -46,6 +46,8 @@ En resumen, **Aegis Systems** simplifica la administración en la nube, **reduce
 - 🗄️ MariaDB  
 - 📡 Protocolos de monitoreo (SNMP, ICMP)
 
+---
+
 ## 🏗️ Arquitectura del Sistema
 
 El sistema Aegis se compone de dos módulos principales que interactúan para proporcionar una solución completa de gestión e interfaz de usuario:
